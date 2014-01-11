@@ -305,7 +305,7 @@ bool QPulseAudioOutput::open()
     } else {
         paVolume = qFloor(m_volume * PA_VOLUME_NORM + 0.5);
     }
-    pa_cvolume_set(&m_chVolume, m_spec.channels, paVolume);
+    //pa_cvolume_set(&m_chVolume, m_spec.channels, paVolume);
 
     if (m_bufferSize <= 0 && m_category == LOW_LATENCY_CATEGORY_NAME) {
         m_bufferSize = bytesPerSecond * LowLatencyBufferSizeMs / qint64(1000);
@@ -626,6 +626,7 @@ qint64 OutputPrivate::writeData(const char *data, qint64 len)
 
 void QPulseAudioOutput::setVolume(qreal vol)
 {
+    return;
     if (vol >= 0.0 && vol <= 1.0) {
         if (!qFuzzyCompare(m_volume, vol)) {
             m_volume = vol;
